@@ -1,3 +1,5 @@
+require 'mharris_ext'
+
 class ReplIndex
   include FromHash
   class << self
@@ -11,17 +13,14 @@ class ReplIndex
   fattr(:exts) { %w(rb js ktr) }
   fattr(:addl_globs) do
     res = []
-    res << "c:/code/sql_tools/views/*.sql"
-    res << "C:/Documents and Settings/mharris.TRIBE/Desktop/*.sql"
-    res << "c:/code/dw_gems/combine/**/*.sql"
+    #res << "c:/code/sql_tools/views/*.sql"
+    #res << "C:/Documents and Settings/mharris.TRIBE/Desktop/*.sql"
+    #res << "c:/code/dw_gems/combine/**/*.sql"
     res
   end
   def globs
     ext_str = "{" + exts.join(",") + "}"
-    res = dirs.map do |dir|
-      "#{dir}/**/*.#{ext_str}"
-    end.flatten
-    res + addl_globs
+    dirs.map { |dir| "#{dir}/**/*.#{ext_str}" } + addl_globs
   end
   fattr(:files) do
     globs.map do |glob|
@@ -61,6 +60,8 @@ class ReplIndex
     dir = File.dirname(f).gsub("/","\\")
     `explorer "#{dir}"`
   end
+  def green(*args); puts(*args); end
+  def red(*args); puts(*args); end
 
   class << self
     def fcf(*args)
