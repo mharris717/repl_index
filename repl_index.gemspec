@@ -20,10 +20,13 @@ Gem::Specification.new do |s|
     ".document",
     ".rspec",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "VERSION",
     "lib/repl_index.rb",
+    "repl_index.gemspec",
     "spec/repl_index_spec.rb",
     "spec/spec_helper.rb"
   ]
